@@ -25,7 +25,7 @@ const BigDaddyComponent = () => {
           closeBigDaddyErrorModal } = useBigDaddyContext();
 
   useEffect(() => {
-    const userSubscription = fcl.currentUser.subscribe((currentUser) => {
+    fcl.currentUser.subscribe((currentUser) => {
       if (currentUser.cid) {
 
         validateLoggedIn(currentUser);
