@@ -57,7 +57,7 @@ import './BigDaddyNFT/BigDaddy-flow-config';
 function App() {
   return (
     <BrowserRouter>
-// Add The BigDaddyProvider and provide your siteid (from minter.bigdaddy-nft.com), the path you want the user to be redirect after NFT verification, and the path of the image that you want to represent your NFT 
+// Add The BigDaddyProvider and provide your siteid (from BigDaddy Minter Page), the path you want the user to be redirect after NFT verification, and the path of the image that you want to represent your NFT 
      <BigDaddyProvider siteId="mysiteid" pathAfterAuth="mypath" creatorPathAfterAuth="mycreatorpath" imagePath="nftImagePath">
         <Routes>
         // Add the route for the BigDaddyComponent
