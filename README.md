@@ -58,14 +58,14 @@ function App() {
   return (
     <BrowserRouter>
 // Add The BigDaddyProvider and provide your siteid (from minter.bigdaddy-nft.com), the path you want the user to be redirect after NFT verification, and the path of the image that you want to represent your NFT 
-     <BigDaddyProvider siteId="mysiteid" pathAfterAuth="mypath" imagePath="nftImagePath">
+     <BigDaddyProvider siteId="mysiteid" pathAfterAuth="mypath" creatorPathAfterAuth="mycreatorpath" imagePath="nftImagePath">
         <Routes>
         // Add the route for the BigDaddyComponent
           <Route path={BIGDADDY_PATH} element={<BigDaddyComponent />} />
         // Protect your website routes with BigDaddyRoute
           <Route path="/" element={<BigDaddyRoute><MyAwesomeSite /></BigDaddyRoute>} />
         // Protect your website admin route with BigDaddyCreatorRoute
-          <Route path="/" element={<BigDaddyCreatorRoute><MyAwesomeAdminPage /></BigDaddyCreatorRoute>} />
+          <Route path="/admin" element={<BigDaddyCreatorRoute><MyAwesomeAdminPage /></BigDaddyCreatorRoute>} />
         </Routes>
       </BigDaddyProvider>
   </BrowserRouter>   
