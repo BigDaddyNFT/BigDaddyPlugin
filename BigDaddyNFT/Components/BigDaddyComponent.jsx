@@ -9,20 +9,31 @@ import BigDaddyLoginPage from './BigDaddyLoginPage.jsx';
 
 
 const BigDaddyComponent = () => {
-  const { bigDaddyErrorMessage,
-          isBigDaddyLoading,
-          isBigDaddyErrorModalOpen,
-          isLoggedIn,
-          hasPersonnalAccess,
-          isCollectionEnabled,
-          nftTemplate,
-          nftImagePath,
-          validateLoggedIn,
-          disconnect,
-          handleBuyNFT,
-          handleActivateBigDaddyCollection,
-          redirectAfterAuth,
-          closeBigDaddyErrorModal } = useBigDaddyContext();
+  const { bigDaddyErrorMessage, 
+    logoimagePath,
+    isBigDaddyLoading, 
+    isBigDaddyErrorModalOpen, 
+    isLoggedIn, 
+    isCreator,
+    hasPersonnalAccess, 
+    isCollectionEnabled,
+    nftTemplate, 
+    nftimagePath,
+    nftList,
+    saleList,
+    fusdBalance,
+    user,
+    needRefresh,
+    validateLoggedIn, 
+    disconnect, 
+    handleBuyNFT, 
+    handleActivateBigDaddyCollection, 
+    redirectAfterAuth,
+    redirectCreatorAfterAuth,
+    closeBigDaddyErrorModal,
+    handleSellNFT,
+    handleBuySecondHandNFT,
+    finishRefresh   } = useBigDaddyContext();
 
   useEffect(() => {
     fcl.currentUser.subscribe((currentUser) => {
@@ -63,7 +74,7 @@ const BigDaddyComponent = () => {
       <div>
         {isBigDaddyLoading ? (
           <div style={bigDaddyLoadingStyle}>
-            <div class="waviy">
+            <div className="waviy">
               <span style={{ "--i": 1 }}>L</span>
               <span style={{ "--i": 2 }}>o</span>
               <span style={{ "--i": 3 }}>a</span>
@@ -94,7 +105,11 @@ const BigDaddyComponent = () => {
       <div>
       {isLoggedIn ? (!isCollectionEnabled ? (
         <BigDaddyActivateCollectionPage
-          handleActivateBigDaddyCollection={handleActivateBigDaddyCollection} />
+          handleActivateBigDaddyCollection={handleActivateBigDaddyCollection}
+          fusdBalance={fusdBalance}
+          user = {user}
+          handleLogOut={handleLogOut} 
+          logoimagePath={logoimagePath}/>
       ) :
         (
           <BigDaddyNFTBuyerPage
@@ -103,11 +118,23 @@ const BigDaddyComponent = () => {
             handleLogOut={handleLogOut}
             hasPersonnalAccess={hasPersonnalAccess} 
             redirectAfterAuth = {redirectAfterAuth}
-            nftImagePath = {nftImagePath}/>
+            nftimagePath = {nftimagePath}
+            nftList={nftList}
+            saleList={saleList}
+            fusdBalance={fusdBalance}
+            handleSellNFT={handleSellNFT}
+            handleBuySecondHandNFT={handleBuySecondHandNFT}
+            user = {user}
+            needRefresh = {needRefresh}
+            finishRefresh={finishRefresh}
+            isCreator={isCreator}
+            redirectCreatorAfterAuth={redirectCreatorAfterAuth}
+            logoimagePath={logoimagePath}/>
         )
       ) : (
         <BigDaddyLoginPage
           bigdaddyhandleLogIn={bigdaddyhandleLogIn}
+          logoimagePath={logoimagePath}
         />
       )}
     </div>

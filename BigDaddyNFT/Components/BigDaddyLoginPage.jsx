@@ -1,13 +1,13 @@
 import React from "react";
 import '../BigDaddyCSS.css';
 
-function BigDaddyLoginPage({ bigdaddyhandleLogIn}) {
+function BigDaddyLoginPage({ bigdaddyhandleLogIn, logoimagePath}) {
   return (
     <div className="bigDaddyContainer">
-      <div class="title">BigDaddy NFT</div>
+    <img src={logoimagePath} width={"300px"} height={"150px"}/>
       <h1>Welcome to your NFT securised website</h1>
       <div style={{display: 'flex', justifyContent: 'center', flexDirection: 'row'}}>
-          <button class="glow-on-hover" onClick={bigdaddyhandleLogIn}>Log In</button>
+          <button className="bigdaddy-button" onClick={bigdaddyhandleLogIn}>Log In</button>
       </div>
     </div>
   );

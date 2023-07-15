@@ -1,9 +1,9 @@
 export const GET_TEMPLATE_BY_SITE_SCRIPT = `
-import BigDaddyContractv1 from 0x8bcea0856b99b24b
+import BigDaddyContract from 0xd75dc7fd8d3cd8f4
 
-pub fun main(siteId :String): BigDaddyContractv1.Template? {
+pub fun main(siteId :String): BigDaddyContract.Template? {
 
-    return BigDaddyContractv1.getTemplate(siteID: siteId)
+    return BigDaddyContract.getTemplate(siteID: siteId)
   
 }
 `;
