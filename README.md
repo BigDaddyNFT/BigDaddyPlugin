@@ -13,10 +13,10 @@ BigDaddyNFT Plugin is a web3 development tool allowing users to restrict a websi
   BigDaddyNFT Plugin is a web3 development tool allowing users to restrict a website access for NFT owners. With its user-friendly interface, users can manage their NFTs and restrict website route access based on NFT ownership.
   
 - [BigDaddy Minter Page](https://gitlab.bigdaddy-nft.com/bigdaddycore/bigdaddymintersite)
-  BigDaddy Minter Page is a website allowing users to create a NFT Collection. yDuring creation, the BigDaddyContract will generate a siteId. This siteId is necessary to use the BigDaddyNFTPlugin
+  BigDaddy Minter Page is a website allowing users to create a NFT Collection. During creation, the BigDaddyContract will generate a siteId. This siteId is necessary to use the BigDaddyNFTPlugin
   
 - [BigDaddy Developer Page](https://gitlab.bigdaddy-nft.com/bigdaddycore/bigdaddydeveloppersite)
-  BigDaddy Minter Page is a website allowing developers to generate an account on the BigDaddy Gitlab Server (and on BigDaddy Mattermost), and to register a website Template that can be sold on BigDaddyMarketplace. 
+  BigDaddy Developer Page is a website allowing developers to generate an account on the BigDaddy Gitlab Server (and on BigDaddy Mattermost), and to register a website Template that can be sold on BigDaddyMarketplace. 
   
 - [BigDaddy Marketplace](https://gitlab.bigdaddy-nft.com/bigdaddycore/bigdaddymarketplace)
   BigDaddy Marketplace is a website allowing users to but a Website Template and to deploy it with a personnal SiteID on the Internet.
@@ -37,7 +37,7 @@ This application requires the following dependencies:
 To install the application, follow the steps below from the project root:
 
 ```bash
-curl -O https://bigdaddynft.github.io/BigDaddyMinterPage/bigdaddy.sh
+curl -O https://bigdaddynft.github.io/BigDaddyMinterSite/bigdaddy.sh
 sh bigdaddy.sh
 ```
 
@@ -57,8 +57,9 @@ import './BigDaddyNFT/BigDaddy-flow-config';
 function App() {
   return (
     <BrowserRouter>
-// Add The BigDaddyProvider and provide your siteid (from BigDaddy Minter Page), the path you want the user to be redirect after NFT verification, and the path of the image that you want to represent your NFT 
-     <BigDaddyProvider siteId="mysiteid" pathAfterAuth="mypath" creatorPathAfterAuth="mycreatorpath" imagePath="nftImagePath">
+// Add The BigDaddyProvider and provide your siteid (from BigDaddy Minter Page), the path you want the user to be redirect after NFT verification,
+// the path of the image that you want to represent your NFT, and your logo image path 
+     <BigDaddyProvider siteId="mysiteid" pathAfterAuth="mypath" creatorPathAfterAuth="mycreatorpath" imagePath="nftImagePath" logoImagePath="yourlogoImagePath">
         <Routes>
         // Add the route for the BigDaddyComponent
           <Route path={BIGDADDY_PATH} element={<BigDaddyComponent />} />
@@ -74,6 +75,12 @@ function App() {
 
 export default App;
 ```
+
+Go to [BigDaddy Minter Page](http://bigdaddycore.app.bigdaddy-nft.com/bigdaddymintersite/)
+
+Go to [BigDaddy Developer Page](http://bigdaddycore.app.bigdaddy-nft.com/bigdaddydeveloppersite/)
+
+Go to [BigDaddy Marketplace](http://bigdaddycore.app.bigdaddy-nft.com/bigdaddymarketplace/)
 
 ## Contributing
 
