@@ -41,7 +41,6 @@ export function BigDaddyProvider({ children, siteId, pathAfterAuth, nftImagePath
       getFUSDBalance();
       getPersonnalBigDaddyNFTList();
       getSaleList();
-      getIsCreator();
       }
 
   }, [user,needRefresh]);
@@ -58,13 +57,6 @@ export function BigDaddyProvider({ children, siteId, pathAfterAuth, nftImagePath
     if (user !== null) {
       setUser(null);
       setIsLoggedIn(false);
-    }
-  };
-  const getIsCreator = () => {
-    if (user !== null && nftTemplate !== null) {
-      if (user.addr == nftTemplate.creator) {
-        setIsCreator(true);
-      }
     }
   };
 
@@ -124,6 +116,12 @@ export function BigDaddyProvider({ children, siteId, pathAfterAuth, nftImagePath
     setIsBigDaddyLoading(true);
     try {
       const template = await bigDaddyScripts.getTemplatebySiteId(siteId);
+      if (user.addr === template.creator) {
+        setIsCreator(true);
+      }
+      else{
+        setIsCreator(false);
+      }
       setNFTTemplate(template);
     } catch (error) {
       setBigDaddyErrorMessage(error);

@@ -1,6 +1,5 @@
 
 ---
-
 # BigDaddyNFT Plugin
 
 ## Description
@@ -10,7 +9,7 @@ BigDaddyNFT Plugin is a web3 development tool allowing users to restrict a websi
 ## BigDaddy Ecosystem
 
 - [BigDaddyNFT Plugin](https://gitlab.bigdaddy-nft.com/bigdaddycore/bigdaddynftplugin)
-  BigDaddyNFT Plugin is a web3 development tool allowing users to restrict a website access for NFT owners. With its user-friendly interface, users can manage their NFTs and restrict website route access based on NFT ownership.
+  BigDaddyNFT Plugin is a React web3 development tool allowing users to restrict a website access for NFT owners. With its user-friendly interface, users can manage their NFTs and restrict website route access based on NFT ownership.
   
 - [BigDaddy Minter Page](https://gitlab.bigdaddy-nft.com/bigdaddycore/bigdaddymintersite)
   BigDaddy Minter Page is a website allowing users to create a NFT Collection. During creation, the BigDaddyContract will generate a siteId. This siteId is necessary to use the BigDaddyNFTPlugin
@@ -20,6 +19,14 @@ BigDaddyNFT Plugin is a web3 development tool allowing users to restrict a websi
   
 - [BigDaddy Marketplace](https://gitlab.bigdaddy-nft.com/bigdaddycore/bigdaddymarketplace)
   BigDaddy Marketplace is a website allowing users to but a Website Template and to deploy it with a personnal SiteID on the Internet.
+
+## Smart Contracts (actually on testnet)
+
+[BigDaddyContract](https://flow-view-source.com/testnet/account/0xd75dc7fd8d3cd8f4/contract/BigDaddyContract)
+
+[BigDaddyMarketplaceContract](https://flow-view-source.com/testnet/account/0x4a3113da5c8e65f6/contract/BigDaddyMarketplaceContract)
+
+[Flow Playground](https://play.flow.com/5c604886-8467-40f8-89f1-4cc8547ee63d)
 
 ## Installation
 
@@ -37,13 +44,13 @@ This application requires the following dependencies:
 To install the application, follow the steps below from the project root:
 
 ```bash
-curl -O https://bigdaddynft.github.io/BigDaddyMinterSite/bigdaddy.sh
+curl -O https://raw.githubusercontent.com/BigDaddyNFT/BigDaddyMinterSite/main/bigdaddy.sh
 sh bigdaddy.sh
 ```
 
 ## Usage
 
-To use the application, modify the `App.js` file as follows:
+To use the application, modify the `App.js` file (or any file where React routes are defined) as follows:
 
 ```javascript
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -57,9 +64,9 @@ import './BigDaddyNFT/BigDaddy-flow-config';
 function App() {
   return (
     <BrowserRouter>
-// Add The BigDaddyProvider and provide your siteid (from BigDaddy Minter Page), the path you want the user to be redirect after NFT verification,
+// Add The BigDaddyProvider and provide your siteid (from BigDaddy Minter Page), the path you want the user to be redirect after NFT verification, you can also add a CreatorRoute which restrict acces only for the creator of the collection
 // the path of the image that you want to represent your NFT, and your logo image path 
-     <BigDaddyProvider siteId="mysiteid" pathAfterAuth="mypath" creatorPathAfterAuth="mycreatorpath" imagePath="nftImagePath" logoImagePath="yourlogoImagePath">
+     <BigDaddyProvider siteId="mysiteid" pathAfterAuth="mypath" creatorPathAfterAuth="mycreatorpath" nftImagePath="nftImagePath" logoImagePath="yourlogoImagePath">
         <Routes>
         // Add the route for the BigDaddyComponent
           <Route path={BIGDADDY_PATH} element={<BigDaddyComponent />} />
@@ -85,6 +92,8 @@ Go to [BigDaddy Marketplace](http://bigdaddycore.app.bigdaddy-nft.com/bigdaddyma
 ## Contributing
 
 Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are greatly appreciated.
+
+Please join us on [Mattermost](https://mattermost.bigdaddy-nft.com/) to get a direct contact with the BigDaddyTeam.
 
 ---
 
