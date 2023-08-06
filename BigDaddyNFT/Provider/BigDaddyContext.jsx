@@ -20,7 +20,8 @@ export function BigDaddyProvider({ children, siteId, pathAfterAuth, nftImagePath
   const [isBigDaddyLoading, setIsBigDaddyLoading] = useState(false);
   const [isBigDaddyErrorModalOpen, setIsBigDaddyErrorModalOpen] = useState(false);
   const [bigDaddyErrorMessage, setBigDaddyErrorMessage] = useState("");
-  const [fusdBalance, setfusdBalance] = useState(0.0);
+  const [flowBalance, setFlowBalance] = useState(0.0);
+  const [usdcBalance, setUsdcBalance] = useState(0.0);
   const [nftList, setNFTList] = useState([]);
   const [saleList, setSaleList] = useState({});
   const [needRefresh, setNeedRefresh] = useState(false);
@@ -38,7 +39,7 @@ export function BigDaddyProvider({ children, siteId, pathAfterAuth, nftImagePath
       hasBigDaddyCollection();
       getBigDaddyTemplate();
       getPersonnalAccess();
-      getFUSDBalance();
+      getBalance();
       getPersonnalBigDaddyNFTList();
       getSaleList();
       }
@@ -66,20 +67,22 @@ export function BigDaddyProvider({ children, siteId, pathAfterAuth, nftImagePath
       const collectionExists = await bigDaddyScripts.hasBigDaddyCollection(user.addr);
       setIsCollectionEnabled(collectionExists);
     } catch (error) {
-      setBigDaddyErrorMessage(error);
+      setBigDaddyErrorMessage(error.message);
       setIsBigDaddyErrorModalOpen(true);
     } finally {
       setIsBigDaddyLoading(false);
     }
   };
 
-  const getFUSDBalance = async () => {
+  const getBalance = async () => {
     setIsBigDaddyLoading(true);
     try {
-      const fusdBalance = await bigDaddyScripts.getFUSDBalance(user.addr);
-      setfusdBalance(fusdBalance);
+      const flowBalance = await bigDaddyScripts.getFLOWBalance(user.addr);
+      const usdcBalance = await bigDaddyScripts.getUSDCBalance(user.addr);
+      setFlowBalance(flowBalance);
+      setUsdcBalance(usdcBalance);
     } catch (error) {
-      setBigDaddyErrorMessage(error);
+      setBigDaddyErrorMessage(error.message);
       setIsBigDaddyErrorModalOpen(true);
     } finally {
       setIsBigDaddyLoading(false);
@@ -92,7 +95,7 @@ export function BigDaddyProvider({ children, siteId, pathAfterAuth, nftImagePath
       const nftList = await bigDaddyScripts.getPersonnalBigDaddyNFTList(siteId, user.addr);
       setNFTList(nftList);
     } catch (error) {
-      setBigDaddyErrorMessage(error);
+      setBigDaddyErrorMessage(error.message);
       setIsBigDaddyErrorModalOpen(true);
     } finally {
       setIsBigDaddyLoading(false);
@@ -105,7 +108,7 @@ export function BigDaddyProvider({ children, siteId, pathAfterAuth, nftImagePath
       const NFTList = await bigDaddyScripts.getBigDaddySaleList(siteId);
       setSaleList(NFTList);
     } catch (error) {
-      setBigDaddyErrorMessage(error);
+      setBigDaddyErrorMessage(error.message);
       setIsBigDaddyErrorModalOpen(true);
     } finally {
       setIsBigDaddyLoading(false);
@@ -124,7 +127,7 @@ export function BigDaddyProvider({ children, siteId, pathAfterAuth, nftImagePath
       }
       setNFTTemplate(template);
     } catch (error) {
-      setBigDaddyErrorMessage(error);
+      setBigDaddyErrorMessage(error.message);
       setIsBigDaddyErrorModalOpen(true);
     } finally {
       setIsBigDaddyLoading(false);
@@ -137,7 +140,7 @@ export function BigDaddyProvider({ children, siteId, pathAfterAuth, nftImagePath
       const personalAccess = await bigDaddyScripts.getPersonnalAccess(siteId, user.addr);
       setHasPersonnalAccess(personalAccess);
     } catch (error) {
-      setBigDaddyErrorMessage(error);
+      setBigDaddyErrorMessage(error.message);
       setIsBigDaddyErrorModalOpen(true);
     } finally {
       setIsBigDaddyLoading(false);
@@ -150,7 +153,7 @@ export function BigDaddyProvider({ children, siteId, pathAfterAuth, nftImagePath
       await bigDaddyTransactions.enableBigDaddyCollection();
       setIsCollectionEnabled(hasBigDaddyCollection);
     } catch (error) {
-      setBigDaddyErrorMessage(error);
+      setBigDaddyErrorMessage(error.message);
       setIsBigDaddyErrorModalOpen(true);
     } finally {
       setIsBigDaddyLoading(false);
@@ -163,7 +166,7 @@ export function BigDaddyProvider({ children, siteId, pathAfterAuth, nftImagePath
       await bigDaddyTransactions.buyBigDaddyNFT(siteId);
       getPersonnalAccess();
     } catch (error) {
-      setBigDaddyErrorMessage(error);
+      setBigDaddyErrorMessage(error.message);
       setIsBigDaddyErrorModalOpen(true);
     } finally {
       setIsBigDaddyLoading(false);
@@ -171,13 +174,13 @@ export function BigDaddyProvider({ children, siteId, pathAfterAuth, nftImagePath
     }
   };
 
-  const handleBuySecondHandNFT = async (sellTemplateNumber) => {
+  const handleBuySecondHandNFT = async (sellTemplateNumber, price) => {
     setIsBigDaddyLoading(true);
     try {
-      await bigDaddyTransactions.buySecondHandBigDaddyNFT(siteId, sellTemplateNumber);
+      await bigDaddyTransactions.buySecondHandBigDaddyNFT(siteId, sellTemplateNumber, price);
       getPersonnalAccess();
     } catch (error) {
-      setBigDaddyErrorMessage(error);
+      setBigDaddyErrorMessage(error.message);
       setIsBigDaddyErrorModalOpen(true);
     } finally {
       setIsBigDaddyLoading(false);
@@ -191,7 +194,7 @@ export function BigDaddyProvider({ children, siteId, pathAfterAuth, nftImagePath
       await bigDaddyTransactions.sellBigDaddyNFT(siteId, sellTemplateNumber, sellPrice);
       getPersonnalAccess();
     } catch (error) {
-      setBigDaddyErrorMessage(error);
+      setBigDaddyErrorMessage(error.message);
       setIsBigDaddyErrorModalOpen(true);
     } finally {
       setIsBigDaddyLoading(false);
@@ -230,7 +233,8 @@ const finishRefresh = () => {
                                       nftimagePath,
                                       nftList,
                                       saleList,
-                                      fusdBalance,
+                                      flowBalance,
+                                      usdcBalance,
                                       user,
                                       needRefresh,
                                       isCreator,

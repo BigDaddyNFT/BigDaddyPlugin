@@ -10,30 +10,13 @@ import BigDaddyLoginPage from './BigDaddyLoginPage.jsx';
 
 const BigDaddyComponent = () => {
   const { bigDaddyErrorMessage, 
-    logoimagePath,
     isBigDaddyLoading, 
     isBigDaddyErrorModalOpen, 
-    isLoggedIn, 
-    isCreator,
-    hasPersonnalAccess, 
+    isLoggedIn,  
     isCollectionEnabled,
-    nftTemplate, 
-    nftimagePath,
-    nftList,
-    saleList,
-    fusdBalance,
-    user,
-    needRefresh,
     validateLoggedIn, 
     disconnect, 
-    handleBuyNFT, 
-    handleActivateBigDaddyCollection, 
-    redirectAfterAuth,
-    redirectCreatorAfterAuth,
-    closeBigDaddyErrorModal,
-    handleSellNFT,
-    handleBuySecondHandNFT,
-    finishRefresh   } = useBigDaddyContext();
+    closeBigDaddyErrorModal  } = useBigDaddyContext();
 
   useEffect(() => {
     fcl.currentUser.subscribe((currentUser) => {
@@ -47,14 +30,6 @@ const BigDaddyComponent = () => {
     });
 
   }, [validateLoggedIn, disconnect]);
-
-  const handleLogOut = () => {
-    fcl.unauthenticate();
-  };
-
-  const bigdaddyhandleLogIn = () => {
-    fcl.logIn();
-  };
 
   const bigDaddyLoadingStyle = {
     position: "fixed",
@@ -103,40 +78,7 @@ const BigDaddyComponent = () => {
 
       </div>
       <div>
-      {isLoggedIn ? (!isCollectionEnabled ? (
-        <BigDaddyActivateCollectionPage
-          handleActivateBigDaddyCollection={handleActivateBigDaddyCollection}
-          fusdBalance={fusdBalance}
-          user = {user}
-          handleLogOut={handleLogOut} 
-          logoimagePath={logoimagePath}/>
-      ) :
-        (
-          <BigDaddyNFTBuyerPage
-            handleBuyNFT={handleBuyNFT}
-            nftTemplate={nftTemplate}
-            handleLogOut={handleLogOut}
-            hasPersonnalAccess={hasPersonnalAccess} 
-            redirectAfterAuth = {redirectAfterAuth}
-            nftimagePath = {nftimagePath}
-            nftList={nftList}
-            saleList={saleList}
-            fusdBalance={fusdBalance}
-            handleSellNFT={handleSellNFT}
-            handleBuySecondHandNFT={handleBuySecondHandNFT}
-            user = {user}
-            needRefresh = {needRefresh}
-            finishRefresh={finishRefresh}
-            isCreator={isCreator}
-            redirectCreatorAfterAuth={redirectCreatorAfterAuth}
-            logoimagePath={logoimagePath}/>
-        )
-      ) : (
-        <BigDaddyLoginPage
-          bigdaddyhandleLogIn={bigdaddyhandleLogIn}
-          logoimagePath={logoimagePath}
-        />
-      )}
+      {isLoggedIn ? (!isCollectionEnabled ? (<BigDaddyActivateCollectionPage/>) : ( <BigDaddyNFTBuyerPage/> )) : ( <BigDaddyLoginPage/> )}
     </div>
     </div>
   );

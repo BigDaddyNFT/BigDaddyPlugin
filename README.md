@@ -1,30 +1,30 @@
 
----
-# BigDaddyNFT Plugin
+![Logo](img/bdnhub-little.png)
 
 ## Description
 
-BigDaddyNFT Plugin is a web3 development tool allowing users to restrict a website access for NFT owners. With its user-friendly interface, users can manage their NFTs and restrict website route access based on NFT ownership.
+bdnHub is a suite of web3 development tool allowing users to restrict a website access for NFT owners. With its user-friendly interface, users can manage their NFTs and restrict website route access based on NFT ownership.
 
 ## BigDaddy Ecosystem
 
 - [BigDaddyNFT Plugin](https://gitlab.bigdaddy-nft.com/bigdaddycore/bigdaddynftplugin)
-  BigDaddyNFT Plugin is a React web3 development tool allowing users to restrict a website access for NFT owners. With its user-friendly interface, users can manage their NFTs and restrict website route access based on NFT ownership.
+  is a web3 development tool allowing users to restrict a website access for NFT owners.
   
-- [BigDaddy Minter Page](https://gitlab.bigdaddy-nft.com/bigdaddycore/bigdaddymintersite)
-  BigDaddy Minter Page is a website allowing users to create a NFT Collection. During creation, the BigDaddyContract will generate a siteId. This siteId is necessary to use the BigDaddyNFTPlugin
+- [bdn Creator](https://gitlab.bigdaddy-nft.com/bigdaddycore/bigdaddymintersite)
+  is a website allowing users to create a NFT Collection. During creation, the BigDaddyContract will generate a siteId. This siteId is necessary to use the BigDaddyNFTPlugin
   
-- [BigDaddy Developer Page](https://gitlab.bigdaddy-nft.com/bigdaddycore/bigdaddydeveloppersite)
-  BigDaddy Developer Page is a website allowing developers to generate an account on the BigDaddy Gitlab Server (and on BigDaddy Mattermost), and to register a website Template that can be sold on BigDaddyMarketplace. 
+- [bdn Dev](https://gitlab.bigdaddy-nft.com/bigdaddycore/bigdaddydeveloppersite)
+  is a website allowing developers to register a website Template that can be sold on BigDaddyMarketplace. 
   
-- [BigDaddy Marketplace](https://gitlab.bigdaddy-nft.com/bigdaddycore/bigdaddymarketplace)
-  BigDaddy Marketplace is a website allowing users to but a Website Template and to deploy it with a personnal SiteID on the Internet.
+- [bdn Mkt](https://gitlab.bigdaddy-nft.com/bigdaddycore/bigdaddymarketplace)
+  is a website allowing users to but a Website Template and to deploy it with a personal SiteID on the Internet.
+
 
 ## Smart Contracts (actually on testnet)
 
-[BigDaddyContract](https://flow-view-source.com/testnet/account/0xd75dc7fd8d3cd8f4/contract/BigDaddyContract)
+[BigDaddyContract](https://flow-view-source.com/testnet/account/0xe3fc00107f99cc50/contract/BigDaddyContract)
 
-[BigDaddyMarketplaceContract](https://flow-view-source.com/testnet/account/0x4a3113da5c8e65f6/contract/BigDaddyMarketplaceContract)
+[BigDaddyMarketplaceContract](https://flow-view-source.com/testnet/account/0xe3fc00107f99cc50/contract/BigDaddyMarketplaceContract)
 
 [Flow Playground](https://play.flow.com/5c604886-8467-40f8-89f1-4cc8547ee63d)
 
@@ -83,19 +83,28 @@ function App() {
 export default App;
 ```
 
-Go to [BigDaddy Minter Page](http://bigdaddycore.app.bigdaddy-nft.com/bigdaddymintersite/)
+## Websites
 
-Go to [BigDaddy Developer Page](http://bigdaddycore.app.bigdaddy-nft.com/bigdaddydeveloppersite/)
+Go to 
+<a href="https://creator.testnet.bdnhub.com/">
+    <img src="img/bdncreatorlogo.png" alt="bdn ceator" height="50"/>
+</a>
 
-Go to [BigDaddy Marketplace](http://bigdaddycore.app.bigdaddy-nft.com/bigdaddymarketplace/)
+
+Go to
+<a href="https://dev.testnet.bdnhub.com/">
+<img src="img/bdndevlogo.png" alt="bdn dev" height="50"/>
+</a>
+
+Go to <a href="https://mkt.testnet.bdnhub.com/">
+<img src="img/bdnmktlogo.png" alt="bdn mkt" height="50"/>
+</a>
+
 
 ## Contributing
 
 Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are greatly appreciated.
 
-Please join us on [Mattermost](https://mattermost.bigdaddy-nft.com/) to get a direct contact with the BigDaddyTeam.
-
----
 
 ## Contributors
 
@@ -103,10 +112,8 @@ BigMahefa (github profile mahefa621@gmail.com)
 
 BigHarick (github profile harick.one@gmail.com)
 
----
 
 ## Contact
 
 You can contact us at bigdaddy@bigdaddy-nft.com or on our mattermost server https://mattermost.bigdaddy-nft.com/
 
----
