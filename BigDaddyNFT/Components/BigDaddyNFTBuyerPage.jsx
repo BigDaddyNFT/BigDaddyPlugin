@@ -1,40 +1,42 @@
 import React, { useState, useEffect } from "react";
 import "../BigDaddyCSS.css";
+import { useBigDaddyContext } from '../Provider/BigDaddyContext.jsx';
+import UserProfile from "./BigDaddyAccountDetails";
 
-function BigDaddyNFTBuyerPage({
-  handleBuyNFT,
-  nftTemplate,
-  handleLogOut,
-  hasPersonnalAccess,
-  redirectAfterAuth,
-  nftimagePath,
-  nftList,
-  saleList,
-  fusdBalance,
-  handleSellNFT,
-  handleBuySecondHandNFT,
-  user,
-  needRefresh,
-  finishRefresh,
-  isCreator,
-  redirectCreatorAfterAuth,
-  logoimagePath
-}) {
+function BigDaddyNFTBuyerPage() {
   const [collectionName, setCollectionName] = useState("");
   const [price, setPrice] = useState(0.0);
   const [selectedNft, setSelectedNft] = useState(null);
-  const [selectedSaleNft, setSelectedSaleNft] = useState(null);
+  const [selectedSaleNft, setSelectedSaleNft] = useState([]);
   const [sellPrice, setSellPrice] = useState(0.0);
   const [isLimitReached, setIsLimitReached] = useState(false);
   const [limit, setLimit] = useState(0);
   const [bigdaddySaleList, setbigdaddySaleList] = useState({});
   const [bigdaddyNftList, setbigdaddyNftList] = useState([]);
+  const [token, setToken] = useState();
+
+  const { 
+    handleBuyNFT,
+    nftTemplate,
+    hasPersonnalAccess,
+    redirectAfterAuth,
+    nftimagePath,
+    nftList,
+    saleList,
+    handleSellNFT,
+    handleBuySecondHandNFT,
+    needRefresh,
+    finishRefresh,
+    isCreator,
+    redirectCreatorAfterAuth,
+    logoimagePath} = useBigDaddyContext();
 
   useEffect(() => {
     if (nftTemplate) {
       setCollectionName(nftTemplate.name);
       setPrice(nftTemplate.price);
       setLimit(nftTemplate.limit);
+      setToken(nftTemplate.token)
       setIsLimitReached(nftTemplate.minted === nftTemplate.limit);
       setbigdaddySaleList(saleList);
       let saleIds = new Set(Object.keys(bigdaddySaleList).map(Number));
@@ -61,19 +63,21 @@ function BigDaddyNFTBuyerPage({
       setSelectedNft(null);
       setSelectedSaleNft(null);
     }
+    // eslint-disable-next-line
   }, [nftTemplate, nftList, saleList, needRefresh]);
 
   return (
     <div className="bigDaddyContainer">
       <div className="activePage-header activePage-header-BuyerPage">
-        <div className="userProfile">
-          <p>Address: {user?.addr}</p>
-          <p>FUSD Balance: {fusdBalance}</p>
-          <button onClick={handleLogOut} className="bigdaddy-button logOut-AP">
-            Log Out
-          </button>
+        <UserProfile/>
+        <div className="logo-wrapper-BP">
+          <img
+              src={logoimagePath}
+              width={"300px"}
+              height={"150px"}
+           alt={"logo"}/>
         </div>
-
+        <div className="button-container">
         {hasPersonnalAccess && (
           <button
             onClick={redirectAfterAuth}
@@ -88,22 +92,16 @@ function BigDaddyNFTBuyerPage({
             Go to my creator Page
           </button>
         )}
-      </div>
-      <div className="logo-wrapper-BP">
-        <img
-          src={logoimagePath}
-          width={"300px"}
-          height={"150px"}
-        />
+        </div>
       </div>
 
-      <h1 className="collectionName">{collectionName}</h1>
+      <h2 style={{color : 'white'}}>{collectionName}</h2>
 
       <div className="contentContainer">
         <div className="left-container">
           <div className="bgdaddycolumn left leftcard-wrapper">
             <div>
-              <div className={"nft-item selected"}>My personnal NFTs</div>
+              <div className={"nft-item selected"} >My personal NFTs</div>
               {bigdaddyNftList.map((nft) => (
                 <div
                   key={nft}
@@ -119,7 +117,7 @@ function BigDaddyNFTBuyerPage({
           {selectedNft && isLimitReached && (
             <div className="bigdaddy-left-table-footer">
               <div className="bigdaddy-label">
-                <label htmlFor=""> Price (in FUSD): </label>
+                <label htmlFor=""> Price (in {token}): </label>
                 <input
                   type="number"
                   value={sellPrice}
@@ -130,7 +128,12 @@ function BigDaddyNFTBuyerPage({
                 />
               </div>
               <button
-                onClick={() => handleSellNFT(selectedNft, sellPrice)}
+                onClick={() => {
+                  let finalPrice = price;
+                  if(Number.isInteger(Number(price))) {
+                    finalPrice = parseFloat(price).toFixed(1);
+                  }
+                  handleSellNFT(selectedNft, finalPrice)}}
                 className="bigdaddy-button  sell-Nfp-Btn">
                 Sell NFT
               </button>
@@ -153,11 +156,11 @@ function BigDaddyNFTBuyerPage({
                   Object.entries(bigdaddySaleList).map(([id, price]) => (
                     <div
                       key={id}
-                      onClick={() => setSelectedSaleNft(id)}
+                      onClick={() => setSelectedSaleNft([id, price])}
                       className={`nft-item ${
-                        selectedSaleNft === id ? "selected" : ""
+                        selectedSaleNft[0] === id ? "selected" : ""
                       }`}>
-                      #{id}/{limit} : {price} FUSD
+                      #{id}/{limit} : {price} {token}
                     </div>
                   ))}
               </div>
@@ -165,7 +168,7 @@ function BigDaddyNFTBuyerPage({
             {isLimitReached && selectedSaleNft && (
               <div className="bigdaddy-right-table-footer footer-right">
                 <button
-                  onClick={() => handleBuySecondHandNFT(selectedSaleNft)}
+                  onClick={() => handleBuySecondHandNFT(selectedSaleNft[0], selectedSaleNft[1])}
                   className="bigdaddy-button sell-Nfp-Btn">
                   Buy NFT
                 </button>
@@ -178,8 +181,8 @@ function BigDaddyNFTBuyerPage({
               <div className="bigdaddy-right-table-footer footer-right">
                 <button
                   onClick={() => handleBuyNFT()}
-                  className="bigdaddy-button sell-Nfp-Btn">
-                  Buy ${price} FUSD
+                  className="bigdaddy-button">
+                  Buy {price} {token}
                 </button>
               </div>
             )}

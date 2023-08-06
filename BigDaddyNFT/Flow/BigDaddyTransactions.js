@@ -49,10 +49,11 @@ class BigDaddyTransactions {
     return this.sendTransaction(SELL_BIG_DADDY_NFT_TX, args)
   }
 
-  async buySecondHandBigDaddyNFT(siteId, templateNumber) {
+  async buySecondHandBigDaddyNFT(siteId, templateNumber, price) {
     let args = fcl.args([
       fcl.arg(siteId, fcl.t.String),
-      fcl.arg(templateNumber, fcl.t.UInt32)
+      fcl.arg(templateNumber, fcl.t.UInt32),
+      fcl.arg(price, fcl.t.UFix64)
     ])
     return this.sendTransaction(BUY_2ND_Hand_NFT_TX, args)
   }
